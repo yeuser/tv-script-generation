@@ -158,9 +158,6 @@ This is your first checkpoint. If you ever decide to come back to this notebook 
 
 
 ```python
-"""
-DON'T MODIFY ANYTHING IN THIS CELL
-"""
 import helper
 import problem_unittests as tests
 
@@ -176,9 +173,6 @@ In this section, you'll build the components necessary to build an RNN by implem
 
 
 ```python
-"""
-DON'T MODIFY ANYTHING IN THIS CELL
-"""
 import torch
 
 # Check for a GPU
@@ -451,9 +445,6 @@ class RNN(nn.Module):
         return hidden
 
 
-"""
-DON'T MODIFY ANYTHING IN THIS CELL THAT IS BELOW THIS LINE
-"""
 tests.test_rnn(RNN, train_on_gpu)
 ```
 
@@ -506,11 +497,8 @@ def forward_back_prop(rnn, optimizer, criterion, inp, target, hidden):
     return loss.item(), hidden
 
 
-# Note that these tests aren't completely extensive.
+# These tests aren't completely extensive.
 # they are here to act as general checks on the expected outputs of your functions
-"""
-DON'T MODIFY ANYTHING IN THIS CELL THAT IS BELOW THIS LINE
-"""
 tests.test_forward_back_prop(RNN, forward_back_prop, train_on_gpu)
 ```
 
@@ -527,11 +515,6 @@ The training loop is implemented for you in the `train_decoder` function. This f
 
 
 ```python
-"""
-DON'T MODIFY ANYTHING IN THIS CELL
-"""
-
-
 def train_rnn(rnn, batch_size, optimizer, criterion, n_epochs, show_every_n_batches=100):
     batch_losses = []
 
@@ -625,10 +608,6 @@ You should also experiment with different sequence lengths, which determine the 
 
 
 ```python
-"""
-DON'T MODIFY ANYTHING IN THIS CELL
-"""
-
 # create model and move to gpu if available
 rnn = RNN(vocab_size, output_size, embedding_dim, hidden_dim, n_layers, dropout=0.5)
 if train_on_gpu:
@@ -976,10 +955,7 @@ print('Model Trained and Saved')
     Model Trained and Saved
 
 
-### Question: How did you decide on your model hyperparameters? 
-For example, did you try different sequence_lengths and find that one size made the model converge faster? What about your hidden_dim and n_layers; how did you decide on those?
-
-**Answer:** 
+### Deciding on the model hyperparameters
 
 As a first step, I mimicked what we have done over excersise projects. Then I started fiddling with `sequence_length`, `hidden_dim` and `learning_rate`. 
 My first aim was to make the network run faster and learn faster while keeping the parameters high enough for it to cover all complexities of natural language, specially a show script. So, I tried to keep sequence_length as small as possible but not too small. I worked around 4,6,7,8,10, and even 20. (Midway into parameter tuning, I settled on 6 as a good but small number)
@@ -1043,9 +1019,6 @@ After running the above training cell, your model will be saved by name, `traine
 
 
 ```python
-"""
-DON'T MODIFY ANYTHING IN THIS CELL
-"""
 import torch
 import helper
 import problem_unittests as tests
@@ -1062,9 +1035,6 @@ To generate the text, the network needs to start with a single word and repeat i
 
 
 ```python
-"""
-DON'T MODIFY ANYTHING IN THIS CELL THAT IS BELOW THIS LINE
-"""
 import torch.nn.functional as F
 
 
@@ -1150,9 +1120,7 @@ You can set the prime word to _any word_ in our dictionary, but it's best to sta
 # run the cell multiple times to get different results!
 gen_length = 2000  # modify the length to your preference
 prime_word = 'newman'  # name for starting the script
-"""
-DON'T MODIFY ANYTHING IN THIS CELL THAT IS BELOW THIS LINE
-"""
+
 pad_word = helper.SPECIAL_WORDS['PADDING']
 generated_script = generate(trained_rnn, vocab_to_int[prime_word + ':'],
                             int_to_vocab, token_dict, vocab_to_int[pad_word],
@@ -1465,10 +1433,3 @@ It's ok if the TV script doesn't make perfect sense. It should look like alterna
 
 You can see that there are multiple characters that say (somewhat) complete sentences, but it doesn't have to be perfect! It takes quite a while to get good results, and often, you'll have to use a smaller vocabulary (and discard uncommon words), or get more data.  The Seinfeld dataset is about 3.4 MB, which is big enough for our purposes; for script generation you'll want more than 1 MB of text, generally. 
 
-# Submitting This Project
-When submitting this project, make sure to run all the cells before saving the notebook. Save the notebook file as "dlnd_tv_script_generation.ipynb" and save another copy as an HTML file by clicking "File" -> "Download as.."->"html". Include the "helper.py" and "problem_unittests.py" files in your submission. Once you download these files, compress them into one zip file for submission.
-
-
-```python
-
-```
